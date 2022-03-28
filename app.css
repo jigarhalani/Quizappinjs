@@ -46,13 +46,14 @@ h3{
     align-items: center;
     max-width: 80rem;
     margin: 0 auto;
+    padding: 2rem;
   }
 
 .container > *{
     width: 100%;
 }
 
-.flex-coulmn{
+.flex-column{
     display: flex;
     flex-direction: column;
 }
