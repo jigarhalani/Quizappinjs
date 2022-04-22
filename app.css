@@ -72,6 +72,9 @@ h3{
 .hidden{
     display: none;
 }
+.justify-inbetween{
+    justify-content: space-between;
+}
 
 .btn{
     font-size: 1.8rem;
@@ -94,4 +97,22 @@ h3{
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
+}
+.h3{
+    display: block;
+    font-size: 2.17rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color: #56a5eb;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.align-item-center{
+    align-items: center;
 }
