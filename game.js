@@ -57,6 +57,7 @@ startGame = () => {
 getNewQuestion = () => {
     if(questionCounter > MAX_QUESTION - 1)
     {
+        localStorage.setItem('gameScore',score);
         window.location.assign("end.html");
     }
     currentQuestion= availableQuestion[questionCounter];
