@@ -15,13 +15,37 @@ let MAX_QUESTION = 3;
 
 let questions = [];
 
-fetch("question.json")
+function transformQuestions(loadedquestions) {
+  return loadedquestions.map((loadedquestion) => {
+    const formattedQuestion = {
+      question: loadedquestion.question,
+    };
+
+    const answerChoices = [...loadedquestion.incorrect_answers];
+    formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
+    answerChoices.splice(
+      formattedQuestion.answer - 1,
+      0,
+      loadedquestion.correct_answer
+    );
+    answerChoices.forEach((choice, index) => {
+      formattedQuestion["choice" + (index + 1)] = choice;
+    });
+    console.log(formattedQuestion);
+    return formattedQuestion;
+  });
+}
+
+fetch(
+  "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+)
   .then((res) => {
     return res.json();
   })
   .then((loadedQuestions) => {
-    console.log(loadedQuestions);
-    questions = loadedQuestions;
+    console.log(loadedQuestions.results);
+    questions = transformQuestions(loadedQuestions.results);
+    //questions = loadedQuestions;
     startGame();
   })
   .catch((err) => {
