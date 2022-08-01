@@ -1,6 +1,8 @@
 console.log("Hello World!");
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const loader = document.getElementById("loader");
+const game = document.getElementById("game");
 
 const scoreCounterText = document.getElementById("score");
 const queCounterText = document.getElementById("questionCounter");
@@ -11,7 +13,7 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestion = [];
 let BONUS = 5;
-let MAX_QUESTION = 3;
+let MAX_QUESTION = 9;
 
 let questions = [];
 
@@ -20,7 +22,6 @@ function transformQuestions(loadedquestions) {
     const formattedQuestion = {
       question: loadedquestion.question,
     };
-
     const answerChoices = [...loadedquestion.incorrect_answers];
     formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
     answerChoices.splice(
@@ -31,7 +32,6 @@ function transformQuestions(loadedquestions) {
     answerChoices.forEach((choice, index) => {
       formattedQuestion["choice" + (index + 1)] = choice;
     });
-    console.log(formattedQuestion);
     return formattedQuestion;
   });
 }
@@ -58,6 +58,8 @@ startGame = () => {
   availableQuestion = [...questions];
   console.log(availableQuestion);
   getNewQuestion();
+  game.classList.remove('hidden');
+  loader.classList.add('hidden');
 };
 
 getNewQuestion = () => {
