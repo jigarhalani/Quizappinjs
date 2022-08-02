@@ -13,7 +13,7 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestion = [];
 let BONUS = 5;
-let MAX_QUESTION = 9;
+let MAX_QUESTION = 10;
 
 let questions = [];
 
@@ -53,7 +53,7 @@ fetch(
   });
 
 startGame = () => {
-  questionCounter = 0;
+  questionCounter = 1;
   score = 0;
   availableQuestion = [...questions];
   console.log(availableQuestion);
@@ -63,21 +63,22 @@ startGame = () => {
 };
 
 getNewQuestion = () => {
-  if (questionCounter > MAX_QUESTION - 1) {
+  if (questionCounter > MAX_QUESTION) {
     localStorage.setItem("gameScore", score);
     window.location.assign("end.html");
+  }else{
+    currentQuestion = availableQuestion[questionCounter-1];
+    queCounterText.innerText = `${questionCounter}/${MAX_QUESTION}`;
+    question.innerText = currentQuestion.question;
+    questionCounter++;
+    choices.forEach((choice) => {
+      const number = choice.dataset["number"];
+      choice.innerText = currentQuestion["choice" + number];
+    });
+  
+    acceptingAnswer = true;
   }
-  currentQuestion = availableQuestion[questionCounter];
-  questionCounter++;
-  queCounterText.innerText = `${questionCounter}/${MAX_QUESTION}`;
-  question.innerText = currentQuestion.question;
-
-  choices.forEach((choice) => {
-    const number = choice.dataset["number"];
-    choice.innerText = currentQuestion["choice" + number];
-  });
-
-  acceptingAnswer = true;
+  
 };
 
 choices.forEach((choice) => {
